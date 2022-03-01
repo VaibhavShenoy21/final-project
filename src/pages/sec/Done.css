@@ -1,0 +1,75 @@
+.styled-table2{
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 70%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.styled-table2 thead tr {
+    background-color: #009b79;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table2 th,
+.styled-table2 td {
+    padding: 12px 15px;
+    width: 50%;
+}
+
+.styled-table2 tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table2 tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table2 tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.btn {
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right;
+}
+
+.btn-edit {
+    background-color: #008cba;
+}
+
+.btn-delete {
+    background-color: #f44336;
+}
+
+.btn-view {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.btn-contact {
+    background-color: #e82764;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.tab-cap {
+    background-color: #009b79;
+    color: #ffffff;
+    text-align: left;
+}
+
+.done-tb {
+    width: 33.33%;
+    float: right;
+}

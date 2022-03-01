@@ -1,0 +1,76 @@
+import React, {useState,useEffect} from 'react';
+import {Link} from "react-router-dom";
+import "./Done.css";
+import {toast} from "react-toastify"
+import axios from "axios";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+
+const Done = () => {
+    const [data, setData] = useState([]); 
+
+    function refreshPage(){
+        window.location.reload();
+    }
+
+    const loadData = async () => {
+        const response = await axios.get("https://backenddddd.herokuapp.com/api/get3");
+        setData(response.data);
+    };
+
+    useEffect(()=>{
+        loadData();
+    },[]);
+
+    const deleteContact = (id) => {
+        if(window.confirm("Are you sure you want to delete the card ?")
+        ) {
+            axios.delete(`https://backenddddd.herokuapp.com/remove/${id}`);
+            toast.success("Card Deleted Successfully");
+            setTimeout(() => loadData(), 500);
+        }
+    }
+    const moveCardBackward = (id) => {
+        if(window.confirm("Are you sure you want to Drag the card ?")
+        ) {
+            axios.put(`https://backenddddd.herokuapp.com/api/update4/${id}`);
+            toast.success("Card Dragged Successfully");
+            setTimeout(() => loadData(), 500);
+            refreshPage();
+            
+        }
+    }
+  return (
+    <div style={{marginTop:"50px"}}>
+        <div className='done-tb'>
+        <table className='styled-table2'>
+        <caption className='tab-cap'>Completed <Link to="/addCardDone">  <button className='btn btn-contact'>Add Card</button> </Link></caption>
+            <tbody>
+                {data.map((item,index) => {
+                    return(
+                        <tr key = {item.id}>
+                            <td>{item.title}</td>
+                            <td>
+                                <div className='icons'>
+                                    <Link to={`/view/${item.id}`}><VisibilityIcon sx={{ color: 'black' }}/></Link>
+                                    <Link to={`/update/${item.id}`}><EditIcon sx={{ color: 'black' }}/></Link>
+                                    <ArrowBackIosIcon onClick={()=> moveCardBackward(item.id)}/>
+                                    <DeleteIcon onClick={()=> deleteContact(item.id)} sx={{ color: 'black' }}/>
+                                </div>
+                            </td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
+        
+        </div>      
+    </div>
+    
+  )
+}
+
+export default Done;
